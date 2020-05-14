@@ -1,0 +1,366 @@
+% warwickthesis.tex modified by M Hadley from utthesis.doc  Sept 96
+% Significant changes were made in 2009, first to work seemlessly with pdflatex
+% and secondly to use the setspace package to control linespacing -
+% removing some incompatibilities that existed before.
+% any comments or problems - contact me  <m.j.hadley@warwick.ac.uk>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% File: utthesis.doc, version 2.0, January 1995
+%%% =============================================
+%%% Copyright (c) 1995 by Dinesh Das.  All rights reserved.
+%%% This file is free and can be modified or distributed as long as
+%%% you meet the following conditions:
+%%%
+%%% (1) This copyright notice is kept intact on all modified copies.
+%%% (2) If you modify this file, you MUST NOT use the original file name.
+%%%
+%%% This file contains a template that can be used with the package
+%%% utthesis.sty and LaTeX2e to produce a thesis that meets the requirements
+%%% of the Graduate School of The University of Texas at Austin.
+%%%
+%%% All of the commands defined by utthesis.sty have default values (see
+%%% the file
+%           warwickthesis.sty
+%%%                        for these values).  Thus, theoretically, you
+%%% don't need to define values for any of them; you can run this file
+%%% through LaTeX2e and produce an acceptable thesis, without any text.
+%%% However, you probably want to set at least some of the macros (like
+%%% \thesisauthor).  In that case, replace "..." with appropriate values,
+%%% and uncomment the line (by removing the leading %'s).
+%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% all comments starting with %! have been added by M Hadley as
+% part of the conversion for the university of warwick
+%
+%
+%\documentclass[11pt,a4paper,twoside]{report}      %% LaTeX2e document.
+%%* Removed twoside option which is no longer accepted - you might want to use it for drafts.
+\documentclass[11pt,a4paper]{report}      %% LaTeX2e document.
+\usepackage{warwickthesis,setspace,graphicx}  %! setspace is used to control linepacing
+
+%%CHANGED BY FEDE
+%%I've changed this so that the references are numbered in square brackets, and if you have more than two together it puts an hyphen [1-5] rather than [1,2,3,4,5]
+\usepackage[square,numbers,compress]{natbib}                    
+%%CHANGED BY FEDE
+%%this is for url formatting          
+%\usepackage[hyphenbreaks]{breakurl}
+\usepackage[hyphens]{url}
+
+\usepackage{multirow} %for splitting table entries over multiple rows
+
+\usepackage{enumerate}  
+
+%%CHANGED BY FEDE
+%%This is the bit (in particular the Glenn option) which puts the boxes around chapter titles.
+\usepackage[Glenn]{fncychap}
+\usepackage{fancyhdr}
+\usepackage{rotating}
+
+\usepackage{todonotes}
+\usepackage[labelfont=bf]{caption, subcaption}
+%\usepackage{subfig}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage[noabbrev]{cleveref}
+\usepackage{textcomp}
+
+\usepackage{pdfpages}
+
+\usepackage{booktabs}
+%\usepackage{floatrow}
+
+%For appendices 
+\usepackage[titletoc]{appendix}
+\usepackage{placeins}
+
+\usepackage{lscape} %for \begin{landscape} command
+
+%Use this to add code to a document. Specifically, R code. 
+\usepackage{listings}
+\lstset{language=R, frame=single}
+
+%\usepackage{mathtools}
+
+%%CHANGED BY FEDE
+%%this is used to put the chapter title, section title, page number at the top of pages; the letters in square brackets refer to the position: L is left, E is even page, R is right, O is odd pages; \leftmark is the current chapter name (which in my case I put on the left of even pages), \thepage is the page number, \rightmark is the current section name. I used shorter chapter/section titles for this because the real ones are too long (\section[short title]{long title})
+%\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\rightmark} 
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage} 
+
+%\fancyhead[LE]{\leftmark}
+%\fancyhead[RE,LO]{\thepage}
+%\fancyhead[RO]{\rightmark}
+
+
+%
+% \mastersthesis           %% Uncomment one of these; if you don't
+% \phdthesis               %% use either, the default is \phdthesis.
+
+%\thesisdraft              %% Uncomment this if you want a draft
+                           %% version; this will print a timestamp
+                           %% on each page of your thesis.
+
+\leftchapter               %% Uncomment one of these if you want
+% \centerchapter           %% left-justified, centered or
+% \rightchapter            %% right-justified chapter headings.
+                           %% The default is \centerchapter.
+
+
+\onehalfspacing            %! This is the default 
+% \singlespacing           %! Uncomment if you want single-spacing,
+%\doublespacing            %! uncomment if you want real double-spacing 
+
+%\setlength{\textheight}{9.0in}      %! Uncomment this for a slightly
+                           %! longer page. The default is now 8.5in (from Feb 2010)
+                           %! regulations require page numbers to be at least 1.5cm into the page.
+                           %! You can even try a longer page to save paper.
+
+%! Double sided printing is no longer allowed (March 2008), it caused too many problems at binding,
+%\setlength{\evensidemargin}{0.15in}  %! Uncomment this line for double sided printing
+
+\setlength{\parindent}{0em} %No paragraph indent
+\setlength{\parskip}{1em} %Free line between paragraphs
+%
+\renewcommand{\thesisdepartmentname}{Mathematics of Real-World Systems CDT}    %! The name of the department
+
+\renewcommand{\thesissubmission}{Submitted to the University of Warwick\\ for the degree of}
+%!
+%! In the title page this wording will be preceeded by: thesis\\
+%! and ended by: Doctor of Philosophy (or the selected alternative names
+%! use \\ where you want a new line
+
+\renewcommand{\thesisauthor} {Emma Louise Davis}    %% Your official name.
+\renewcommand{\thesisauthorno}{1017207} %! your university number
+\renewcommand{\thesismonth}{December}     %% Your month of graduation.
+\renewcommand{\thesisyear}{2019}        %% Your year of graduation.
+\renewcommand{\thesistitle}{Modelling nuanced interventions for neglected tropical diseases.}     %% The title of your thesis; use mixed-case.
+
+%! \renewcommand{\thesistitletypesize}{\LARGE}   %! Put this in if you
+                                  %!   want a Large title the default is \large
+
+\renewcommand{\thesisauthorpreviousdegrees}{....}
+                                     %% Your previous degrees, abbreviated;
+                                     %% separate multiple degrees by commas.
+
+\renewcommand{\thesissupervisor}{....}
+                                     %% Your thesis supervisor; use mixed-case
+                                     %% and don't use any titles or degrees.
+
+\renewcommand{\thesisauthoraddress}{....}
+                                     %% Your permanent address; use "\\" for
+                                     %% linebreaks.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%! For the library declaration page only
+%! \renewcommand{\thesiscopyrightagree}{agree}
+                        %! agreement to allow single photocopies this is the default
+%! \renewcommand{\thesiscopyrightagree}{do not agree}
+                        %! refusal to allow single photocopies
+
+%! \renewcommand{\thesiscopyrightagreewhen}{immediately.}
+                        %! that is the default to be used in all but the most exceptional circumstances
+%! \renewcommand{\thesiscopyrightagreewhen}{after an embargo period of ……….................... months/years as agreed by the Chair of the Board of Graduate Studies.}
+                         %! An alternative, if you have permission. Replace the .... month/years with approved period or change the wording to insert a date.
+
+%! \renewcommand{\thesisinternetagree}{thesis can be made publicly available online.}
+                         %! default online declaration for WRAP
+%! \renewcommand{\thesisinternetagree}{thesis cannot be made publicly available online.}
+                          %! use if necessary
+%! \renewcommand{\thesisinternetagree}{thesis can be made publicly available only after…..}
+                          %! conditional agreement, please put the date in place of the dots, ending with a fullstop.
+%! \renewcommand{\thesisinternetagree}{full thesis cannot be made publicly available online, but I am submitting a separately identified additional abridged version that can be made available online.}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%
+%%% The following commands are all optional, but useful if your requirements
+%%% are different from the default values in utthesis.sty.  To use them,
+%%% simply uncomment (remove the leading %) the line(s).
+
+% \renewcommand{\thesisdegree}{...}  %% Uncomment this only if your thesis degree is NOT "DOCTOR OF PHILOSOPHY" for \phdthesis or "MASTER OF ARTS" for \mastersthesis.  Provide the correct FULL OFFICIAL name of the degree.
+
+% \renewcommand{\thesisdegreeabbreviation}{...}
+                                     %% Use this if you also use the above command; provide the OFFICIAL abbreviation of your thesis degree.
+
+%\renewcommand{\thesistype}{Thesis}  %% Use this ONLY if your thesis type is NOT "Thesis" Provide the OFFICIAL type of the thesis; use mixed-case.
+
+% \renewcommand{\thesistypist}{...}  %% Use this to specify the name of the thesis typist if it is anything other than "the author".
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%\input header.tex          %! Input declarations, new
+                              %theorems etc.
+                              
+                              
+%My macros
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\third}{\frac{1}{3}}
+\newcommand{\quarter}{\frac{1}{4}}
+\newcommand{\thrTwo}{\frac{3}{2}}
+\newcommand{\Dt}{\Delta t}
+
+\newcommand{\var}{\text{var}} 
+\newcommand{\mean}{\text{mean}}
+\newcommand{\cov}{\text{cov}}
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bestar}{\begin{equation*}}
+\newcommand{\eestar}{\end{equation*}}
+\newcommand{\ba}{\begin{equation} \begin{aligned}}
+\newcommand{\ea}{\end{aligned} \end{equation}}
+\newcommand{\bastar}{\begin{equation*} \begin{aligned}}
+\newcommand{\eastar}{\end{aligned} \end{equation*}}
+
+\newcommand{\ddt}[1]{\frac{\mathrm{d}#1}{\mathrm{d}t}}
+\newcommand{\dint}[1]{\, \mathrm{d}#1}
+\newcommand{\myvec}[1]{ \mathbf{#1} }
+\newcommand{\mymat}[1]{ \boldsymbol{#1} }
+\newcommand{\mygmat}[1]{ \boldsymbol{#1} }
+\newcommand{\mygvec}[1]{ \boldsymbol{#1} }
+\newcommand{\TR}[1]{#1^{\!\top}}
+\newcommand{\INV}[1]{#1^{-1}}
+
+\begin{document}
+%%TC:ignore
+\thesiscopyrightpage                 %! Generate the copyright page for the library.
+
+%%* Uncomment a title page.
+%\thesistitlepage                     %% Generate the title page.
+\thesistitlecolourpage           %! Generates a COLOUR title page.
+
+\pagenumbering{roman} %! Begins roman numerals start from page i.
+
+\newpage
+
+\topskip0pt
+\vspace*{\fill}
+
+\raggedright\Large{
+\hspace{3cm} The deeper understanding Faust sought\\
+\hspace{3cm} Could not from the Devil be bought.\\
+\hspace{3cm} But now we are told,\\
+\hspace{3cm} By theorists bold,\\
+\hspace{3cm} All we need to know is $R_0$.\\}
+\vspace{0.8cm}
+\raggedleft\normalsize\MakeUppercase{Dahlem Workshop, Berlin 1982} \cite{Anderson1982_workshop}.
+
+\vspace*{\fill}
+\raggedright
+
+\tableofcontents    %% Generate table of contents.
+%\listoftables      %% Uncomment this to generate list of tables.
+%\listoffigures     %% Uncomment this to generate list of figures.
+
+
+%\begin{thesisacknowledgments}
+%\input{ack.tex}                   
+%\todo[inline]{To do}
+%\end{thesisacknowledgments}
+
+\begin{thesisdeclaration}
+This thesis is submitted to the University of Warwick in support of my application for the degree of Doctor of Philosophy in Interdisciplinary Mathematics and Complexity Science. It has been composed by myself and has not been submitted in any previous application for any degree.
+
+Parts of this thesis have been published or are currently under review: 
+%\hspace{-1cm}
+\begin{enumerate}
+\item The main methodology and results from Chapter \ref{chap:STH} have been published as: 
+
+\textbf{Davis EL, Danon L, Prada JM, Gunawardena SA, Truscott JE, Vlaminck J, Anderson RM, Levecke B, Morgan ER, Hollingsworth TD} \textit{Seasonally timed treatment programs for Ascaris lumbricoides to increase impact—An investigation using mathematical models.} PLoS neglected tropical diseases. 2018 Jan 18;12(1):e0006195 (see Supplementary 2).
+
+\item The main methodology and results from Chapter \ref{chap:ELIM} have been published as: 
+
+\textbf{Davis EL, Reimer L, Pellis L, Hollingsworth TD} \textit{Evaluating the evidence for lymphatic filariasis elimination.} Trends in Parasitology. 2019 Nov; 35(11):860-869 (see Supplementary 3).
+\end{enumerate}
+\end{thesisdeclaration}
+%%TC:endignore
+
+\begin{thesisabstract}
+\begin{onehalfspace}       
+\noindent The majority of the World Health Organization (WHO) guidelines for control or elimination of neglected tropical diseases (NTDs) involve broad recommendations. There is some variation in these guidelines according to factors such as the co-endemicity of other diseases or failure to hit targets, but largely the same methods are used across a diverse range of cultures and climates. As the majority of NTDs have life-cycles that involve free-living stages or intermediary hosts, environmental conditions and external factors have the potential to either benefit or undermine the efforts of interventions. Through models we can explore the effect the varying biological parameters and simulate the outcomes of different types of interventions. This thesis aims to investigate a few of the current knowledge gaps by developing novel models of these processes for two specific diseases: \textit{Ascaris lumbricoides}, a soil-transmitted helminth infection, and lymphatic filariasis (LF), a long-lived worm transmitted by mosquitoes. Extending established models from the literature, the work presented attempts to better describe some of the biological processes influencing transmission and the impact this could have on control and elimination strategies. A seasonal model of Ascaris infection is used to quantify the impact of fluctuations in external larval stage development on mass drug administration success, finding that the impact of seasonal variance is highly dependent on local weather profiles. Models of LF, considering both stochastic elimination and the vector dynamics, demonstrate the importance of solid experimental evidence for parameterising models and highlight why adult-acting vector control measures are potentially more effective than larval-based methods. Additionally, the vector model for LF is then used to recommend a novel method for deriving human prevalence estimates through vector sampling, including confidence interval and sample size calculations. This work has demonstrated new methods for modelling helminth infections in humans and drawn some important conclusions that could impact future studies and public health strategies for NTDs. By challenging modelling assumptions and realising what we don't know, this thesis has lead to a deeper understanding of the processes involved and highlighted where further research is required.
+
+
+\end{onehalfspace}
+\end{thesisabstract}
+
+%\begin{thesisabbreviations}       %! Use this to give a list of
+                                   %! abbreviations
+                                   %! It can be anything
+%\end{thesisabbreviations}         %! allowed in LaTeX2e par-mode.
+                                   %!The following may be useful':
+                     %!\begin{itemize}
+                     %!     \item[symbol]descriptive text..
+                     %!\end{itemize}
+
+%\end{thesisabbreviations}
+
+\pagenumbering{arabic} %! Begins Arabic numerals start from page 1.
+
+
+\chapter{Introduction}
+%\input{../Introduction/Introduction.tex}
+
+\input{Project/Introduction.tex}
+
+\chapter{Soil-transmitted helminths (STH)}
+\chaptermark{STH}
+\label{chap:STH}
+
+\input{STHseasonal.tex}
+
+\chapter{Lymphatic filariasis elimination}
+\chaptermark{LF elimination}
+\label{chap:ELIM}
+
+% Note: Talk to Joe about branching process literature review
+
+\input{Project/LFelimination.tex}
+
+\chapter{Modelling mosquito-borne disease}
+\chaptermark{Modelling mosquitoes}
+\label{chap:VEC}
+
+\input{Project/VectorModel.tex}
+
+\chapter{Xeno-monitoring}
+\label{chap:XENO}
+
+\input{Project/Xenomonitoring.tex}
+
+\chapter{Aggregation}
+\label{chap:AGG}
+
+\input{Project/IntensityAggregation.tex}
+
+
+\chapter{Discussion}
+\addcontentsline{toc}{chapter}{Discussion}
+
+\input{Project/Discussion.tex}
+
+          %% this will do the appendices
+%%TC:ignore
+\bibliographystyle{unsrt}
+\addcontentsline{toc}{chapter}{Bibliography}
+\bibliographystyle{elsarticle-harv}
+\bibliography{thesis}
+
+%\bibliography{report}
+
+\chapter*{Supplementary material}
+\addcontentsline{toc}{chapter}{Supplementary material}
+\begin{appendices}
+\renewcommand\pagenumbering[1]{}
+
+\input{Project/Supplementary.tex}
+%%TC:endignore
+%\chapter{Less obvious day of the week effects: additional figures}
+%\input{../DOWChapter/DOW_appendix.tex}
+\end{appendices}  
+
+\end{document}

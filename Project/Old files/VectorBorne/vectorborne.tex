@@ -1,0 +1,195 @@
+
+
+\section{Vector dynamics}
+
+\subsection{Gonotrophic cycle model}
+
+Considering the gonotrophic cycle of an adult mosquito, we divide the stages into four categories: emerged (E), fed (F), gestating (G) and ovipositing (O) \cite{killeen2016}. In the absence of intervention new adult mosquitoes are considered to be born into the emerged class at rate $\beta$ and obey a constant natural death rate $\delta$. The cycle length is taken to be 2 days \cite{killeen2016}; dynamics can then be described using the following system of ordinary differential equations (ODEs):
+
+
+\begin{eqnarray}
+\frac{dE}{dt} &=& \beta + \pi_1O - \pi_2E -\delta E \\
+\frac{dF}{dt} &=& \pi_2E - \pi_3 F - \delta F \\
+\frac{dG}{dt} &=& \pi_3F - \pi_4G - \delta G \\
+\frac{dO}{dt} &=& \pi_4G - \pi_1O - \delta O \,,
+\end{eqnarray}
+
+where $\pi_2$ represents baseline the rate of feeding and moving from emerged to fed; $\pi_i$, $i=1,3,4$, denote the movement between the other states. The magnitude of $\beta$ has no bearing on results as we will focus on vector infection prevalence and relative population changes, but it could be chosen to fit a required population size. Similarly $\pi_i$, $i=1,\dots,4$ are chosen such that feeding (moving from emerged to fed) is faster than the other transitions, but exact values shouldn't impact conclusions about LF transmission since the cycle length remains fixed as 2 days.
+
+\subsection{Control methods}
+
+There are a number of vector-based control methods used to combat mosquito-borne diseases; we will focus on three different options: long-lasting insecticide-treated nets (LLINs), indoor residual spraying (IRS), and larvicides. LLINs affect the bite-rate and cause mortality at point of feeding; IRS kills fed mosquitoes that rest on affected surfaces after a blood meal; larvicides bring down the birth rate by killing immature life stages. We can introduce these measures into the model by adjusting the parameters:
+
+\begin{eqnarray}
+\frac{dE}{dt} &=& \beta(1-\lambda) + \pi_1O - \pi_2(p_1+p_2)E -\delta E \\
+\frac{dF}{dt} &=& \pi_2p_1E - \pi_3 F - (\delta+\gamma)F \\
+\frac{dG}{dt} &=& \pi_3F - \pi_4G - \delta G \\
+\frac{dO}{dt} &=& \pi_4G - \pi_1O - \delta O \,,
+\label{eqn:ODE}
+\end{eqnarray}
+
+Here $p_1$ and $p_2$ represent the probabilities of vector success or death during a feeding attempt. When no LLINs are in use $p_1=1$ and $p_2=0$. We consider a successful feed to have occurred in any of three potential scenarios: biting indoors despite bednet presence with probability; biting indoors in the absence of bednets; biting outdoors -- including cattle. Death due to IRS is considered as an additional death rate, $\gamma$, in the fed class. The birth rate is multiplied by a scaling factor $(1-\lambda)$, where $\lambda$ is the proportion of the larval population killed due to larvicides. See Fig. \ref{fig:diag_vec} for a visualisation of possible feeding outcomes; values of parameters are given in Table \ref{table:param}. 
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=8cm]{VectorBorne/mosbednets.pdf}
+\caption{Mosquito feeding dynamics. Outcomes of feeding, death and repeating are all dependant on: proportions of blood meals taken outdoors; bednet coverage; bednet efficacy parameters.}
+\label{fig:diag_vec}
+\end{center}
+\end{figure}
+
+\begin{table*}[t]
+\caption{Parameter definitions and values for vector models.}% title of Table
+\vspace{.1cm}
+\centering % used for centering table
+\begin{tabular}{c l c c}% centered columns (4 columns)
+\hline\hline                        %inserts double horizontal lines
+Name & Definition & Value & Source \\ [0.5ex]% inserts table 
+%heading
+\hline                  % inserts single horizontal line
+$\beta$ & Birth rate of mosquitoes & 500 & n/a \\% inserting body of the table
+$\lambda$ & Proportion larvae killed by larvicides & & \\
+$\delta$ & Natural per capita death rate & 0.1 & \cite{le2007} \\
+$\gamma$ & Death rate due to IRS & & \\
+$\theta$ & Proportion of feeding attempts indoors & 0.9 & \cite{le2007} \\
+$\omega$ & Bednet coverage & 0.8 & Set \\
+$\sigma$ & Probability of successfully feeding in presence of bednet & 0.1 & \cite{le2007} \\
+$\nu$ & Probability of dying upon contact with bednet & 0.3 & \cite{le2007} \\
+$p_1$ & Success probability per attempt, $= \theta\omega\sigma+\theta(1-\omega)+(1-\theta)$ & 0.352 & Calculated \\
+$p_2$ & Death probability per attempt, $= \theta\omega\nu$ & 0.216 & Calculated \\
+$f$ & Gonotrophic cycle length & 2 & \cite{quinones1997}  \\
+$\pi_1$ & Rate of moving from ovipositing to emerged & 5/3 & n/a  \\
+$\pi_2$ & Rate of seeking host (feeding in absence of bednets) & 5 & n/a  \\
+$\pi_3$ & Rate of moving from fed to gestating & 5/3 & n/a  \\ 
+$\pi_4$ & Rate of moving from gestating to ovipositing & 5/3 & n/a \\
+%$\kappa$ & Incubation period of LF in mosquitoes & 8 & \cite{le2007,erickson2009}  \\ 
+%$\eta$ & Probability of infection upon biting infectious host & 0.37 & \cite{gambhir2008}  \\
+[1ex]      % [1ex] adds vertical space
+\hline%inserts single line
+\end{tabular}
+\label{table:param}% is used to refer this table in the text
+\end{table*}
+
+\subsection{Generational distribution}
+
+To gain insight into the age-structure of the vector population we consider a generational formulation of the gonotrophic cycle model, where a subscript $i$ denotes the number of times mosquitoes in a given class have completed the cycle, giving an infinite series of ODEs:
+\begin{eqnarray}
+\frac{dE_i}{dt} &=& \begin{cases}  \beta(1-\lambda) - \pi_2(p_1+p_2)E_{i} -\delta E_{i} &\mbox{ if } i=0\\ \pi_1O_{i-1} - \pi_2(p_1+p_2)E_{i} -\delta E_{i} &\mbox{ if } i\geq 1
+\end{cases}\\
+\frac{dF_i}{dt} &=& \pi_2p_1E_i - \pi_3 F_i - (\delta+\gamma) F_i \\
+\frac{dG_i}{dt} &=& \pi_3F_i - \pi_4G_i - \delta G_i \\
+\frac{dO_i}{dt} &=& \pi_4G_i - \pi_1O_i - \delta O_i \,.
+\label{eqn:dist}
+\end{eqnarray}
+Births can only occur into generation $i=0$. Using this model it is possible to calculate the parity of the population.
+
+It is reasonable to assume the vector population is at equilibrium if vector control in a given setting is fixed, as the vector dynamics are faster than the human dynamics. We can hence derive the following relationship between sequential emerged classes:
+\begin{equation}
+E_n^* = CE_{n-1}^*\,,
+\end{equation}
+where
+\begin{equation}
+C := \frac{\pi_1\pi_2\pi_3\pi_4p_1}{(\pi_2(p_1+p_2)+\delta)(\pi_3+\delta+\gamma)(\pi_4+\delta)(\pi_1+\delta)}
+\end{equation}
+is a constant and $C<1$. As the constant term is less than unity, the difference equation can be solved to get an explicit formula, $E_n^* = C^nE_0^*$, which can be used to calculate the number of vectors in each feeding generation for initial conditions
+\begin{equation}
+E_0 = \frac{\beta(1-\lambda)}{\pi_2(p_1+p_2)+\delta}\,.
+\end{equation}
+The parity of the population is given by
+\begin{equation}
+P = 1-\frac{E_0}{\sum_i E_i}\,.
+\end{equation}
+
+\section{Disease dynamics}
+
+The incubation period of LF in the mosquito is approximately 8 days \cite{le2007,erickson2009}, and for malaria this can range from 10 to 21 days, depending on parasite species \cite{CDCMalaria}. This means infection cannot be passed on to a new host immediately after the mosquito is infected. Due to the short adult mosquito lifespans (average 10 days \cite{le2007}), including the infected but not yet infectious vectors in the force of infection on humans would result in a severe over-estimation when considering the proportion of infectious bites. When modelling the disease dynamics we therefore introduce an exposed class -- where a mosquito has been exposed to infection but is not yet contributing to the net force of infection on the host population.
+
+\subsection{ODE model}
+
+We consider three disease states: susceptible ($S$), exposed ($E$) and infected ($I$). Extending the ODE model (as in Eqn \ref{eqn:ODE}) to include disease requires sub-dividing each stage of the cycle into these three states, giving a new system of twelve ODEs. Births only occur in the susceptible population; a proportion, $p$, of susceptible vectors moving from emerged to fed become exposed following a successful feed resulting in transmission of disease; all exposed mosquitoes can become infected, this occurs at rate $1/\kappa$ where $\kappa$ is the average vector incubation period. Due to timescales of infection and vector lifespan we do not consider recovery from infection. See Fig. \ref{fig:diag_vec_SEI} for a diagram of the full dynamics.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=10cm]{VectorBorne/mosSEI.pdf}
+\caption{Mosquito disease dynamics. Birth occurs in the susceptible (S) state, then during the feeding process vectors can become exposed with probability $p$ given a successful feed. Exposed vectors from all stages become Infectious at rate $1/k$, where $k$ is the incubation period. Straight lines indicate transitions, diagonal lines represent deaths and dashed lines are infection events.}
+\label{fig:diag_vec_SEI}
+\end{center}
+\end{figure}
+
+\subsection{Generational distribution}
+
+%Considering instead the generational distribution model (Eqn. \ref{eqn:dist}) we can use the binomial probability, $p$, of a successful feed leading to a new vector infection to calculate the probability a mosquito is infected by the end of generation $k$:
+%\begin{equation}
+%p^{(k)} = \sum_{j=0}^k (1-p)^jp\,.
+%\label{eqn:p}
+%\end{equation}
+
+%Assuming the vector incubation period is equivalent to approximately $n$ generations, we can calculate the equilibrium number of exposed and infected mosquitoes:
+%\begin{eqnarray}
+%\mbox{\# Exposed} = \sum_{i=1} E_i^* p^{(i-1)}\,,\\
+%\mbox{\# Infected} = \sum_{i=n} E_i^* p^{(i-n)}\,.
+%\label{eqn:numinf}
+%\end{eqnarray}
+%These values can be normalised to give prevalence of exposure and infection in the vector population.
+
+%The probability of a vector in the emerged class surviving until it has successfully fed is given by
+%\begin{equation}
+%\mathbb{P}[\mbox{Successfully feed}] = \frac{\pi_2p_1}{\pi_2(p_1+p_2)+\delta}\,,
+%\end{equation}
+%which can then be used to consider the proportion of exposed mosquitoes that successfully bite and hence could go on to transmit infection. In the absence of bednets this probability is $0.980$, but increasing bednet coverage to $40\%$ results in a decrease to $0.841$, reflecting a reduction in the chance of a vector passing on infection in addition to the reduction in vector prevalence. %reword this? use better statistics - consider incubation period!
+
+Consider instead the generational distribution model (Eqn. \ref{eqn:dist}), such that the number of emerged vectors in generation $n$ is $C^nE_0^*$. It is sufficient to consider the emerged class as this is the stage of the feeding cycle where vectors have potential to pick up or transmit disease through biting. If we define the binomial probability, $p$, of a successful feed leading to a new vector infection, then the probability a mosquito becomes exposed during generation $n$ is $p^{(n)}=(1-p)^{n-1}p$. Combining these gives the number of vectors infected by generation $n$:
+\begin{equation}
+\sum_{k=1}^{n}C^kE_0^*(1-p)^{k-1}p = E_0^*C^n[1-(1-p)^n]\,.
+%C^nE_0^*(1-p)^{n-1}p\,.
+\end{equation}
+The total number of diseased (exposed or infectious) vectors is given by summation across the generations;
+\begin{eqnarray}
+N_D &=& E_0^*\sum_{n=0}^{\infty} [C^n - C^n(1-p)^n]\\
+&=& \frac{pCE_0^*}{(1-C)(1-C+pC)}\,.
+%%N_D &=& \sum_{n=1}^{\infty}(1-p)^{n-1}pC^nE_0^*\\
+%%&=& pE_0^*C\sum_{n=0}^{\infty}(1-p)^nC^n\\
+%%&=& \frac{pE_0C}{1-C(1-p)}\,.
+\end{eqnarray}
+
+If the incubation period is assumed to be equivalent to $M$ generations (or cycles), then the probability of surviving until infectious is given by $C^M$ and can be treated as a multiplicative factor when calculating the numbers of infectious and exposed vectors:
+
+\begin{eqnarray}
+N_I &=& C^MN_D\,,\\
+N_E &=& N_D - N_I\,.
+\end{eqnarray}
+%If incubation period is assumed to be equivalent to $M$ generations then the probability a vector will survive at least $M$ cycles, which is given by
+%\begin{equation}
+%\sum_{j=M}^{\infty}C^j\,,
+%\end{equation}
+%can be used to calculate the number of infectious vectors:
+%\begin{eqnarray}
+%N_I &=& \sum_{n=1}^{\infty}\bigg(\sum_{j=M}^{\infty}C^j\bigg)p^{(n)}C^nE_0^*\\
+%&=& \sum_{n=1}^{\infty}\bigg(\sum_{j=M}^{\infty}C^{j}\bigg)\bigg((1-p)^{n-1}p\bigg)\bigg(C^nE_0^*\bigg)\\
+%&=& pE_0^*C\bigg(\sum_{j=0}^{\infty}C^{j+M}\bigg)\bigg(\sum_{n=1}^{\infty}(1-p)^{n-1}C^{n-1}\bigg)\\
+%&=& pE_0^*C^{M+1}\bigg(\frac{1}{1-C}\bigg)\bigg(\frac{1}{1-C(1-p)}\bigg)\\
+%&=&\frac{pE_0^*C^{M+1}}{(1-C)(1-C(1-p))} \,.
+%\end{eqnarray}
+These values can be normalised to give prevalence of exposure and infection in the vector population.
+
+The force of infection on humans, $FoI_H$, is proportional to the number of infectious mosquitoes and the vector bite rate:
+\begin{equation}
+FoI_H \propto \pi_2p_1N_I\,.
+\end{equation}
+
+\section{Transmission measures}
+
+Include comparative calculations for:
+\begin{itemize}
+\item $R_0$
+\item Vectorial capacity
+\item EIR
+\end{itemize}
+looking at different types and coverage/intensity of vector control.
+\\
+
+
+%\bibliographystyle{elsarticle-harv}
+
+%%
+%% End of file `ejemplo latex RIAI.tex'.

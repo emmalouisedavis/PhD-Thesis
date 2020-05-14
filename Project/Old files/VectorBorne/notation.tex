@@ -1,0 +1,222 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage{tkz-graph}
+\usepackage{lipsum}
+\GraphInit[vstyle = Shade]
+\tikzset{
+  LabelStyle/.style = { rectangle, rounded corners, draw,
+                        minimum width = 2em,
+                        text = red, font = \bfseries },
+  VertexStyle/.append style = { inner sep=5pt,
+                                font = \Large\bfseries},
+  EdgeStyle/.append style = {->, bend left} }
+\usepackage{xcolor}
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{gray},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+\usepackage{wrapfig}
+
+\begin{document}
+
+\title{Vector model notation}
+\author{Emma Davis}
+\date{\today}
+\maketitle
+
+\subsection*{Useful statistics}
+
+Entomological innoculation rate (EIR):
+
+\begin{equation}
+E = maz
+\end{equation}
+
+\noindent Vectorial capacity:
+
+\begin{equation}
+V = \frac{ma^2p^v}{-\ln(p)} = \frac{ma^2}{g}e^{-gv}
+\end{equation}
+
+\noindent Basic reproductive number:
+
+\begin{equation}
+R_0 = \frac{ma^2bc}{gr}e^{-gv} = \frac{ma^2bc}{-\ln(p)r}p^v = \frac{Vbc}{r}
+\end{equation}
+
+\subsection*{Model results}
+
+We can calculate the total number of diseased vectors (exposed and infectious), $D$:
+
+\begin{eqnarray}
+D := Y+Z = \frac{\kappa KE_0}{(1-K)(1-K+\kappa K)}\\
+E_0 = \frac{\beta(1-\theta)}{\pi_2(q_1+q_2)+g}
+\end{eqnarray}
+
+\noindent From this we can get the total number of infectious vectors:
+
+\begin{equation}
+Z = K^nD\,,
+\end{equation}
+
+and hence directly calculate our useful statistics. For example, EIR is given by:
+
+\begin{equation}
+E = maK^n\bigg(\frac{\kappa KE_0}{(1-K)(1-K+\kappa K)}\bigg)\frac{1}{M}
+\end{equation}
+
+\noindent Still need to comput how the following parameters will be affected by vector control:
+
+\begin{itemize}
+\item $a=Q/\delta$ -- $\delta$ will be affected by bednets. Need to calculate in terms of $q_1$ etc.
+\item $n$ will change with $a$ -- lower bite rate will give longer cycles and hence incubation period will be fewer cycles. Always round up!
+\item $m$ -- fix \# of hosts and recalcuate ratio for vector population (i.e. just scale with reduction in vector population for all control measures)
+\item $g$ -- death rate will be affected by IRS and bednets
+\end{itemize}
+
+In the absence of interventions the mean feeding cycle length is,
+
+\begin{equation}
+\delta = 1/\pi_1+1/\pi_2+1/\pi_3+1/\pi_4\,,
+\end{equation}
+
+where $1/\pi_2$ is the average time to hunt and take a blood meal. IRS and larvicides won't impact hunting time, but the repelling effect of bednets will result in some vectors taking longer to move from emerged to fed.
+
+If we assume a repelled vector begins the hunting process from scratch, then the expected time taken to successfully feed will be equal to the time taken to feed given a successful first attempt plus the expected time taken to feed scaled by the proportion of vector that repeat on any given attempt.
+
+\begin{eqnarray}
+\mathbb{E}[\mbox{Time to feed}] &=& \mathbb{E}[\mbox{Time }|\mbox{ Successful attempt}] + \mathbb{P}[\mbox{Repeat}]\mathbb{E}[\mbox{Time to feed}]\\
+\mathbb{E}[\mbox{Time to feed}] &=& \frac{1}{\pi_2} + Q\omega(1-\sigma-\nu)\mathbb{E}[\mbox{Time to feed}]\\
+\mathbb{E}[\mbox{Time to feed}] &=& \frac{1}{\pi_2(1-Q\omega(1-\sigma-\nu))}\\
+\end{eqnarray}
+
+Now we can express overall feeding cycle length, $\delta$, in terms of bednet parameters:
+
+\begin{eqnarray}
+\delta &=& \frac{1}{\pi_2(1-Q\omega(1-\sigma-\nu))} + \frac{1}{\pi_3}+\frac{1}{\pi_4}+\frac{1}{\pi_1}\\
+&=& \frac{(\pi_1\pi_3+\pi_1\pi_4+\pi_3\pi_4)\pi_2(1-Q\omega(1-\sigma-\nu))+\pi_1\pi_3\pi_4}{\pi_1\pi_2\pi_3\pi_4(1-Q\omega(1-\sigma-\nu))}
+\end{eqnarray}
+
+and the human blood feeding rate is given by:
+
+\begin{eqnarray}
+a &=& Q\bigg(\frac{1}{\pi_2(1-Q\omega(1-\sigma-\nu))} + \frac{1}{\pi_3}+\frac{1}{\pi_4}+\frac{1}{\pi_1}\bigg)^{-1}\\
+&=& Q\frac{\pi_1\pi_2\pi_3\pi_4(1-Q\omega(1-\sigma-\nu))}{(\pi_1\pi_3+\pi_1\pi_4+\pi_3\pi_4)\pi_2(1-Q\omega(1-\sigma-\nu))+\pi_1\pi_3\pi_4}
+\end{eqnarray}
+
+The ratio of vectors to humans $m$, can be scaled by changes in the mosquito population ($m=M/H$), where
+
+\begin{equation}
+M = \sum_{i=0}^{\infty}E_0K^i = \frac{E_0}{1-K}
+\end{equation}
+
+and $K$ describes the probability of surviving each feeding cycle, with dependence on vector control parameters included in $E_0$ and $K$.
+
+The death rate will depend on IRS and bednet usage. We can relate the probability of a vector surviving one feeding cycle, $K$, to a per cycle death rate $-ln(K)$, then we have
+
+\begin{equation}
+g = \frac{-ln(K)}{\delta}
+\end{equation}
+
+as the instanenous daily death rate.
+
+\FloatBarrier
+
+\begin{table*}[h]
+\caption{Standard parameter names for vector models (Smith et al 2012).}% title of Table
+\vspace{.1cm}
+\centering % used for centering table
+\begin{tabular}{l c c}% centered columns (4 columns)
+\hline\hline                        %inserts double horizontal lines
+Definition & Parameter & Notes \\ [0.5ex]% inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Population density of humans & $H$ &  \\
+Population density of mosquitoes & $M$ &  \\
+Number of infected humans & $X$ &  \\
+Number of exposed vectors & $Y$ & $N_E$ \\
+Number of infectious vectors & $Z$ & $N_I$ \\
+Human blood feeding rate (prop vectors that feed on humans/day) & $a$ & \\
+Probability vector survives one day & $p$ & \\
+Instantaneous vector death rate & $g$ & $g=-\ln(p)$  \\
+Intrinsic incubation period (in humans) & $u$ & \\
+Extrinsic incubation period (in vectors) & $v$ & \\
+Human recovery rate & $r$ & \\
+Prob vector infected after biting infected human & $c$ & \\
+Prob infectious bite infects a human & $b$ & \\
+Blood feeding rate (all prey) & $f$ & \\
+Fraction of blood meals on humans & $Q$ & $a=fQ$ \\
+Mean feeding cycle length & $\delta$ & $a=Q/\delta$\\
+Prevalence of malaria in humans & $x$ & \\
+Fraction of exposed vectors & $y$ & \\
+Fraction of infectious vectors & $z$ & \\
+Ratio of vectors to humans & $m$ & $=M/H$ \\
+Human biting rate (\# bites per human per day) & $HBR$ & $=ma$\\
+EIR (\# infectious bites per human per day) & $E$ & $=maz$ \\
+The average mosquito lifespan & $1/g$ & \\
+Stability index (\# human bites per vector across its life) & $S$ & $=a/g$\\
+Probability vector survives to infectiousness & $P$ & $=e^{-gv}$\\
+Probability vector becomes infected after human blood feed & $\kappa$ & $=cx$\\
+Vectorial capacity & $V$ & \\
+Basic reproductive number & $R_0$ & \\
+Effective reproductive number under control & $R_c$ & \\
+Critical vector density required to sustain transmission & $m'$ & \\
+      % [1ex] adds vertical space
+\hline%inserts single line
+\end{tabular}
+\label{table:param}% is used to refer this table in the text
+\end{table*}
+
+\begin{table*}[t]
+\caption{Additional parameter names required for this model.}% title of Table
+\vspace{.1cm}
+\centering % used for centering table
+\begin{tabular}{l c c}% centered columns (4 columns)
+\hline\hline                        %inserts double horizontal lines
+Definition & Parameter & Notes \\ [0.5ex]% inserts table 
+%heading
+\hline                  % inserts single horizontal line
+Rate of moving from Exposed to Fed & $\pi_2$ & \\
+Rate of moving from Fed to Resting & $\pi_3$ & \\
+Rate of moving from Resting to Ovipositing & $\pi_4$ & \\
+Rate of moving from Ovipositing to Exposed & $\pi_1$ & \\
+Emergence rate (from larval stages) & $\beta$ & \\
+Linear reduction in emergence rate due to larvicides & $\theta$ & \\
+Additional IRS-induced death rate & $\gamma$ & \\
+Bednet coverage & $\omega$ & \\
+Probability successful feed in presence of bednet & $\sigma$ & \\
+Probability death caused by bednet & $\nu$ & \\
+Probability successful feed on single attempt & $q_1$ & $=1-Q\omega(1-\sigma)$ \\
+Proabability death on a single feeding attempt & $q_2$ & $=Q\omega\nu$\\
+Probability a vector survives one feeding cycle & $K$ & previously $C$\\
+The number of newly emerged null-parous vectors & $B_0$ &\\
+Extrinsic incubation period (in number of feeding cycles) & $N$ & \\
+Probability of vector infection from one successful bite & $\hat{p}$ & $=xc$ \\
+\hline%inserts single line
+\end{tabular}
+\label{table:param2}% is used to refer this table in the text
+\end{table*}
+
+\end{document}
+
+%%
+%% End of file `ejemplo latex RIAI.tex'.
