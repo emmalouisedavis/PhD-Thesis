@@ -75,6 +75,8 @@
 
 \usepackage{lscape} %for \begin{landscape} command
 
+\usepackage[acronym]{glossaries}
+
 %Use this to add code to a document. Specifically, R code. 
 \usepackage{listings}
 \lstset{language=R, frame=single}
@@ -226,6 +228,109 @@
 \newcommand{\TR}[1]{#1^{\!\top}}
 \newcommand{\INV}[1]{#1^{-1}}
 
+\makenoidxglossaries
+
+\newglossaryentry{breakpoint}
+{
+        name={break-point},
+        description={A prevalence level below which sustained transmission is not viable and elimination (zero infections) becomes an absorbing state}
+}
+
+\newglossaryentry{IU}
+{
+        name={implementation unit},
+        description={The designated level of the administrative unit in a country for which the decision to administer antifilarial drugs to the entire population is taken if it is identified as having indigenous transmission or endemicity}
+}
+
+\newglossaryentry{EIR}
+{
+        name={entomological inocculation rate},
+        description={The expected number of infectious bites received by a single host each year}
+}
+
+\newglossaryentry{EOT}
+{
+        name={elimination of transmission},
+        description={Transmission permanently halted, i.e. zero new infections}
+}
+
+\newglossaryentry{EPHP}
+{
+        name={elimination as a public health problem},
+        description={A metric, measured by TAS, used by the WHO to validate program success}
+}
+
+\newglossaryentry{L3}
+{
+        name={L3},
+        description={The third larval stage of the parasite, at which point it is infectious to humans}
+}
+
+\newglossaryentry{parity}
+{
+        name={parity},
+        description={The number of times a mosquito has given birth (i.e. the number of times they've taken a blood meal)}
+}
+
+\newglossaryentry{parous}
+{
+        name={parous},
+        description={A parous vector is one that has given birth at least once, and hence has taken one blood meal}
+}
+
+\newglossaryentry{nightblood}
+{
+        name={night blood smear},
+        description={A test used to detect presence of microfilaria in the blood. Blood samples must be taken at night for the test to be effective.}
+}
+
+\newglossaryentry{nulliparous}
+{
+        name={nulliparous},
+        description={A nulliparous vector is one that has never given birth or taken a blood meal}
+}
+
+\newglossaryentry{TAS}
+{
+        name={transmission assessment surveys},
+        description={A series of surveys designed by the WHO to measure post-MDA infection levels and verify EPHP}
+}
+
+\newglossaryentry{tripledrug}
+{
+        name={triple drug},
+        description={Ivermectin, Diethylcarbamazine \& Albendazole (IDA), a drug combination that has recently become the gold-standard for treatment of LF}
+}
+
+\newglossaryentry{VtoH}
+{
+        name={vector-host ratio},
+        description={The number of vectors per human in a geographical region}
+}
+
+\newacronym{abr}{ABR}{annual biting rate}
+\newacronym{bfr}{BFR}{blood feeding rate}
+\newacronym{eip}{EIP}{extrinsic incubation period}
+\newacronym{eir}{EIR}{entomological inoculation rate}
+\newacronym{eot}{EOT}{elimination of transmission}
+\newacronym{ephp}{EPHP}{elimination as a public heath problem}
+\newacronym{fts}{FTS}{filarial test strip}
+\newacronym{ict}{ICT}{immunochronographic test}
+\newacronym{irs}{IRS}{indoor residual spraying}
+\newacronym{iu}{IU}{implementation unit}
+\newacronym{eu}{EU}{evaluation unit}
+\newacronym{lf}{LF}{lymphatic filariasis}
+\newacronym{llins}{LLINs}{long-lasting insecticide-treated nets}
+\newacronym{mda}{MDA}{mass drug adminstration}
+\newacronym{mf}{mf}{microfilaria}
+\newacronym{ntds}{NTDs}{neglected tropical diseases}
+\newacronym{presac}{pre-SAC}{pre-school-aged children}
+\newacronym{sac}{SAC}{school-aged children}
+\newacronym{sd}{s.d.}{standard deviation}
+\newacronym{sth}{STH}{soil-transmitted helminths}
+\newacronym{tas}{TAS}{transmission assessment survey}
+\newacronym{who}{WHO}{World Health Organization}
+
 \begin{document}
 %%TC:ignore
 \thesiscopyrightpage                 %! Generate the copyright page for the library.
@@ -254,14 +359,29 @@
 \raggedright
 
 \tableofcontents    %% Generate table of contents.
-%\listoftables      %% Uncomment this to generate list of tables.
-%\listoffigures     %% Uncomment this to generate list of figures.
+\listoftables      %% Uncomment this to generate list of tables.
+\listoffigures     %% Uncomment this to generate list of figures.
+
+\clearpage\begingroup\let\newpage\relax\printnoidxglossary[type=\acronymtype]
+\endgroup
+\clearpage\begingroup\let\newpage\relax\printnoidxglossary
+\endgroup
+
+\begin{thesisacknowledgments}
+Firstly I'd like to whole-heartedly thank my PhD supervisors, D\'eirdre Hollingsworth and Matt Keeling, for all of their support and guidance throughout this journey. Credit in particular has to go to D\'eirdre for both introducing me to epidemiology and then reigniting my enthusiasm for academic research at a point when I was questioning everything. Thank you for always encouraging me to stretch further and aim higher, I wouldn't have achieved any of these things without your unfailing belief and confidence in me. 
+
+I'm also grateful for the support provided by the Mathematics of Real-World Systems CDT, including the funding provided through the EPSRC that allowed me to undertake this PhD. Warwick has been a truly wonderful place to learn and practice mathematics and I've had the opportunity to meet far too many amazing people to mention along the way. I'm sad to leave, but hopefully I will return again sometime in the future.
+
+I'd also like to thank the University of Warwick Archery Club for enriching my years spent at Warwick and the many friends it's given me along the way. Archery, and sport in general, is now an irrevocable part of my life and has helped me grow in so many ways that have impacted every corner of my life.
+
+Thank you to my Mum, for encouraging me to take responsibility for my own learning right from the beginning of my school education and demonstrating time and time again that it's possible to achieve anything you put your mind to. Thanks as well to my sister, Clare, for inspiring me with your determination to overcome obstacles and succeed against the odds, and to my Dad for always believing in me no matter what.
+
+Finally, I'd like to say thank you to my best friend and life-partner, Tom. Your unfailing support and love have been such a constant throughout this entire journey. Thank you for putting up with my widely fluctuating moods, late nights, stressed-out rants and little frustrations. Thank you too for being here with me to celebrate my victories, small and large, to champion my ideas and encourage my dreams. You're incredible and I love you.
 
 
-%\begin{thesisacknowledgments}
 %\input{ack.tex}                   
 %\todo[inline]{To do}
-%\end{thesisacknowledgments}
+\end{thesisacknowledgments}
 
 \begin{thesisdeclaration}
 This thesis is submitted to the University of Warwick in support of my application for the degree of Doctor of Philosophy in Interdisciplinary Mathematics and Complexity Science. It has been composed by myself and has not been submitted in any previous application for any degree.
@@ -281,7 +401,7 @@ Parts of this thesis have been published or are currently under review:
 %%TC:endignore
 
 \begin{thesisabstract}
-\begin{onehalfspace}       
+\begin{onehalfspace}    
 \noindent The majority of the World Health Organization (WHO) guidelines for control or elimination of neglected tropical diseases (NTDs) involve broad recommendations. There is some variation in these guidelines according to factors such as the co-endemicity of other diseases or failure to hit targets, but largely the same methods are used across a diverse range of cultures and climates. As the majority of NTDs have life-cycles that involve free-living stages or intermediary hosts, environmental conditions and external factors have the potential to either benefit or undermine the efforts of interventions. Through models we can explore the effect the varying biological parameters and simulate the outcomes of different types of interventions. This thesis aims to investigate a few of the current knowledge gaps by developing novel models of these processes for two specific diseases: \textit{Ascaris lumbricoides}, a soil-transmitted helminth infection, and lymphatic filariasis (LF), a long-lived worm transmitted by mosquitoes. Extending established models from the literature, the work presented attempts to better describe some of the biological processes influencing transmission and the impact this could have on control and elimination strategies. A seasonal model of Ascaris infection is used to quantify the impact of fluctuations in external larval stage development on mass drug administration success, finding that the impact of seasonal variance is highly dependent on local weather profiles. Models of LF, considering both stochastic elimination and the vector dynamics, demonstrate the importance of solid experimental evidence for parameterising models and highlight why adult-acting vector control measures are potentially more effective than larval-based methods. Additionally, the vector model for LF is then used to recommend a novel method for deriving human prevalence estimates through vector sampling, including confidence interval and sample size calculations. This work has demonstrated new methods for modelling helminth infections in humans and drawn some important conclusions that could impact future studies and public health strategies for NTDs. By challenging modelling assumptions and realising what we don't know, this thesis has lead to a deeper understanding of the processes involved and highlighted where further research is required.
 
 
@@ -300,7 +420,6 @@ Parts of this thesis have been published or are currently under review:
 %\end{thesisabbreviations}
 
 \pagenumbering{arabic} %! Begins Arabic numerals start from page 1.
-
 
 \chapter{Introduction}
 %\input{../Introduction/Introduction.tex}
@@ -347,7 +466,6 @@ Parts of this thesis have been published or are currently under review:
 %%TC:ignore
 \bibliographystyle{unsrt}
 \addcontentsline{toc}{chapter}{Bibliography}
-\bibliographystyle{elsarticle-harv}
 \bibliography{thesis}
 
 %\bibliography{report}

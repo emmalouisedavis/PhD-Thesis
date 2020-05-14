@@ -18,7 +18,7 @@ However, there are no standard methods for gathering or interpreting xenomonitor
 
 A study in Egypt in 2000 recorded pre-MDA host mf prevalence levels of 11.5\% in Giza and 4.1\% in Qalubiya, with mosquito prevalence estimates of 2.38-3.88\% and 3.07-5.99\% respectively, before going on to measure host and mosquito prevalence annually with each round of MDA \cite{Farid2001,Farid2007}. The prevalence in mosquitoes was seen to decrease with the prevalence in humans. Another study, conducted in American Samoa, measured a range of post-MDA vector prevalences below 3\% \cite{Schmaedick2014} and a more recent post-validation study from Sri Lanka reports mosquito prevalences of 0.01-1.04\% in settings with a host mf prevalence of 0-1.4\% \cite{Rao2016}. Table \ref{tab:MXdata} describes a few relevant data sets found in the literature. 
 
-\begin{table}[h]
+\begin{table}
     \centering
     \begin{tabular}{c|c|c|c|c}
         Country & Area & Human mf (\%) & Vector DNA (\%) & Source  \\
@@ -50,7 +50,7 @@ A study in Egypt in 2000 recorded pre-MDA host mf prevalence levels of 11.5\% in
         Ghana & Central & 1.7 & 4.3 (anopheles) & \cite{Owusu2015} \\
          &  & 1.7 & 0.02 (culex) & 
     \end{tabular}
-    \caption{Data from field studies comparing human mf prevalence and vector DNA prevalence via PCR. Vector prevalence estimates are all estimated from pooled observations.}
+    \caption[Xenomonitoring field study data.]{Data from field studies comparing human mf prevalence and vector DNA prevalence via PCR. Vector prevalence estimates are all estimated from pooled observations.}
     \label{tab:MXdata}
 \end{table}
 
@@ -65,7 +65,7 @@ Let $V$ represent vector prevalence, $H$ represent host (human) prevalence and $
     \label{eqn:probVecPos}
 \end{equation}
 
-We can then use this to derive vector prevalence as a function of gravidity ($K$) and human prevalence ($H$), assuming that parasite DNA taken from any previous blood meal will be detectable at the point of sampling. We also assume here that the proportion of blood meals taken on non-human animals is negligible but these methods could easily be extended to account for this if it was a substantial factor by replacing $H$ with $QH$ in Equation \ref{eqn:probVecPos}, where $Q$ is the proportion of feeding on humans.
+We can then use this to derive vector prevalence as a function of gravidity ($K$) and human prevalence ($H$), assuming that parasite DNA taken from any previous blood meal will be detectable at the point of sampling (one study has demonstrated ability to detect LF parasite DNA for more than 2 weeks following ingestion of an mf positive blood meal \cite{fischer2007}). We also assume here that the proportion of blood meals taken on non-human animals is negligible but these methods could easily be extended to account for this if it was a substantial factor by replacing $H$ with $QH$ in Equation \ref{eqn:probVecPos}, where $Q$ is the proportion of feeding on humans.
 
 \begin{eqnarray}
 V &=& \sum_{i}\frac{X_0K^i(1-(1-H)^i)}{X_0/(1-K)}\\
@@ -99,7 +99,7 @@ Values for error of 1--5\% can be seen in Table \ref{tab:sampleV}.
         \hline
         $n$ & 9600 & 2397 & 381
     \end{tabular}
-    \caption{Sample sizes for number of vectors required to measure vector prevalence in a particular trap type, by percentage allowable error ($E$).}
+    \caption[Sample size calculations.]{Sample sizes for number of vectors required to measure vector prevalence in a particular trap type, by percentage allowable error ($E$).}
     \label{tab:sampleV}
 \end{table}
 
@@ -266,35 +266,35 @@ The error here is then dependent on the number of pools from each trap type, $m_
 
 Figure \ref{fig:pool} shows the relationship between pool prevalence and vector prevalence for a range of pool sizes. A pool of size one would simply represent testing every vector, giving a linear relationship ($p=q$), but as pool size increases the curve becomes more convex. For a pool size of 20 vectors an 80\% pool prevalence would give less than a 10\% vector prevalence. For low vector prevalences (up to 5\%) the relationship between pool prevalence and vector prevalence is approximately linear, even for pools of up to 20 vectors. 
 
-\begin{figure}[h!]
+\begin{figure}[ht]
 \begin{center}$
 \begin{array}{cc}
 \includegraphics[height=6cm]{Figures/IndVsPool}
 \includegraphics[height=6cm]{Figures/IndVsPoolZoom}
 \end{array}$
 \end{center}
-\caption{The relationship between vector prevalence ($p$) and pool prevalence ($q$) for different pool sizes if we assume large number of pools ($M$). Top: The relationship for all pool and vector prevalences. Bottom: Zoomed in on 0 - 20\% vector prevalence.}
+\caption[Pool prevalence vs. actual prevalence.]{The relationship between vector prevalence ($p$) and pool prevalence ($q$) for different pool sizes if we assume large number of pools ($M$). Top: The relationship for all pool and vector prevalences. Bottom: Zoomed in on 0 - 20\% vector prevalence.}
 \label{fig:pool}
 \end{figure}
 
 Figure \ref{fig:xeno} shows the reviewed data from Egypt \cite{Farid2007,Ramzy2006}, PNG \cite{Reimer2013_insecticidal,Weil2008} and Ghana \cite{Owusu2015} on a graph showing the relationship between vector prevalence and human mf prevalence for different proportions of parous mosquito (45\%, 60\% and 75\%). These studies all estimated vector prevalence from pooled prevalences, using similar methods to what we have described here, via commonly-used software tool PoolScreen. The lower part of the figure focuses on regions of low prevalence ($<10$\%), for which the model relationship is close to linear. Linear regression fits to the data show the differences between settings, indicating systematic differences in the mosquito dynamics. Even within one country, for example looking at Giza (yellow) and Qalubiya (red) there are potentially significant differences in the proportion of vectors that are parous. This reiterates the importance of having robust and well-characterised methods, involving understanding of the underlying dynamics, when interpreting vector measures of disease for public health applications.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}$
 \begin{array}{cc}
 \includegraphics[height=6cm]{Project/Figures/Xeno/mfPrev_crop.png}
 \includegraphics[height=6cm]{Project/Figures/Xeno/mfPrevZoomFit_crop.png}
 \end{array}$
 \end{center}
-\caption{Data and model linking vector prevalence and individual prevalence for different parity levels. In the data vector prevalence is estimated from pooled prevalence and the model shows curves for a range of parity (45\%, 60\% and 75\%). Right: Zoomed in to low prevalence ($<10$\%) with shaded regions representing uncertainty of fitted linear regressions to: a) Giza, Egypt \cite{Farid2007,Ramzy2006} (Red), b) Qalubiya, Egypt \cite{Farid2007,Ramzy2006} (yellow), c) Sepik \cite{Reimer2013_insecticidal} and Usino \cite{Weil2008}, PNG (purple). A dashed line shows the best fit for Ghana \cite{Owusu2015} but uncertainty cannot be calculated due to sample size.}
+\caption[Xenomonitoring data with model comparison.]{Data and model linking vector prevalence and individual prevalence for different parity levels. In the data vector prevalence is estimated from pooled prevalence and the model shows curves for a range of parity (45\%, 60\% and 75\%). Right: Zoomed in to low prevalence ($<10$\%) with shaded regions representing uncertainty of fitted linear regressions to: a) Giza, Egypt \cite{Farid2007,Ramzy2006} (Red), b) Qalubiya, Egypt \cite{Farid2007,Ramzy2006} (yellow), c) Sepik \cite{Reimer2013_insecticidal} and Usino \cite{Weil2008}, PNG (purple). A dashed line shows the best fit for Ghana \cite{Owusu2015} but uncertainty cannot be calculated due to sample size.}
 \label{fig:xeno}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[height=7cm]{Project/Figures/Xeno/VaryError.png}
 \end{center}
-\caption{Plot showing how required sample size, $n$, of parous vectors varies with chosen error, $E$. Required sample size of random vectors, e.g. using light traps, is $m=an$. Here we take $a=10$ and the total number of vectors that need to be sampled is given by $n + m = n+an$.}
+\caption[Sample size calculations.]{Plot showing how required sample size, $n$, of parous vectors varies with chosen error, $E$. Required sample size of random vectors, e.g. using light traps, is $m=an$. Here we take $a=10$ and the total number of vectors that need to be sampled is given by $n + m = n+an$.}
 \label{fig:error}
 \end{figure}
 
@@ -306,21 +306,21 @@ Using the relationships derived in this chapter we can run trial sampling scenar
 
 Figure \ref{fig:parity} shows parity estimates plotted against true underlying parity, with confidence intervals calculated using the Ln method (orange) and Delta method (blue). The main difference between the methods is that the Ln method is non-symmetrical around the central estimate, which in most cases leads to a narrower lower interval and a wider upper interval. However, aside from this small shift, there is generally good agreement between the two methods. The Delta method is the most widely used in statistics and is generalisable to more complex functions of random variables, so this method is the one that we use going forward.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[height=8cm]{Project/Figures/Xeno/ParousEst.png}
 \end{center}
-\caption{Example simulation showing comparison between the two methods of confidence interval derivation for proportion of population parous when calculated from observed vector prevalence in gravid and random traps: Ln (orange, triangle) and Delta (blue, inverted triangle). Sample sizes: $n=1187$, $m=11870$ and underlying host prevalence $H=0.01$. Data points are offset to allow ease of viewing, neighboring points represent the same parous proportion.}
+\caption[Estimated vs. true proportion parous.]{Example simulation showing comparison between the two methods of confidence interval derivation for proportion of population parous when calculated from observed vector prevalence in gravid and random traps: Ln (orange, triangle) and Delta (blue, inverted triangle). Sample sizes: $n=1187$, $m=11870$ and underlying host prevalence $H=0.01$. Data points are offset to allow ease of viewing, neighboring points represent the same parous proportion.}
 \label{fig:parity}
 \end{figure}
 
 Figure \ref{fig:vPrev} shows the estimated vector prevalence plotted against true vector prevalence for parous (orange) and random (blue) sampling of the population, with confidence intervals calculated using the Delta method. The randomly sampled vectors will include nulliparous mosquitoes which cannot test positive for LF presence as they haven't yet taken a bloodmeal, hence the random prevalence will always be less than the parous prevalence. As the sampling method takes into account trap efficiency, we have sampled ten times the number of random vectors as parous vectors, meaning the confidence intervals on these are narrower. However, the parous prevalence estimates are all within 0.5\% prevalence of the true value and the sampled data matches the true underlying value well.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[height=8cm]{Project/Figures/Xeno/VPrevEst.png}
 \end{center}
-\caption{Example simulation showing the estimated vector prevalence in parous (orange, diamond) and random (blue, circle) populations, with sample sizes $n=1187$ and $m=11870$ respectively and underlying host prevalence $H=0.01$. Confidence intervals were calculated using the Delta method.}
+\caption[Estimated vector prevalence (parous and random).]{Example simulation showing the estimated vector prevalence in parous (orange, diamond) and random (blue, circle) populations, with sample sizes $n=1187$ and $m=11870$ respectively and underlying host prevalence $H=0.01$. Confidence intervals were calculated using the Delta method.}
 \label{fig:vPrev}
 \end{figure}
 
@@ -328,11 +328,11 @@ The next step is to consider the confidence intervals around the estimated host 
 
 The majority of the confidence intervals from individually tested vectors are less than 1\% prevalence on either side of the estimated host prevalence, whereas some of the confidence intervals from pooled testing are closer to 1.5\% each side. If pooling was being used then a larger sample size would be required for the same error width, but this would likely still represent fewer overall lab tests than using this sample size and individual testing.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
 \includegraphics[height=9cm]{Project/Figures/Xeno/HPrevEst.png}
 \end{center}
-\caption{Example simulation showing comparison of estimated host prevalence for individual (red, circle) and pooled (blue, diamond) tested mosquitoes. Sample sizes $n=1187$ and $m=11870$ respectively in both cases, with a pool size of $N=20$ in the pooled case, and underlying host prevalence $H=0.01$. Confidence intervals were calculated using the Delta method. Data points are offset to allow ease of viewing.}
+\caption[Estimated host prevalence (individual and pooled testing).]{Example simulation showing comparison of estimated host prevalence for individual (red, circle) and pooled (blue, diamond) tested mosquitoes. Sample sizes $n=1187$ and $m=11870$ respectively in both cases, with a pool size of $N=20$ in the pooled case, and underlying host prevalence $H=0.01$. Confidence intervals were calculated using the Delta method. Data points are offset to allow ease of viewing.}
 \label{fig:hPrev}
 \end{figure}
 
@@ -348,14 +348,16 @@ Comparing the model of host prevalence as a function of prevalence to data obser
 
 When considering the required sample sizes used to measure vector and parous vector prevalence we estimated that a total sample size of just over 13,000 vectors (1187 parous, 11870 random) would be required to measure host prevalence to within an error of 1\% mf prevalence. This is a relatively large, but not infeasible, sample size. However, the required sample size increases exponentially with decreasing error, meaning the required precision of surveillance will be a key determining factor in whether xenomonitoring is a feasible method for post-MDA settings.
 
-Pooling vectors is common practice in the field, particularly resources are limited. Our first investigations suggest that the difference in confidence between individually testing and pooling vectors is relatively small, potentially due to the low prevalence settings considered. We would expect this difference to be increased for higher prevalences, but as the main interest in xenomonitoring comes from elimination settings, pool sizes of up to 20 vectors in these places should only lead to a small loss of accuracy. More work needs to be done to directly link required sample size, pool size and error width. 
+Cost of surveillance is also a key factor when programs consider which method to use. Both collection and PCR testing of mosquitoes are currently relatively high in cost due to the necessity of expensive real-time PCR machines \cite{Goodman2003} and skilled labour \cite{Okorie2016}, meaning individual capture and testing of vectors is likely to be infeasible in most settings. However, human surveillance is also a high cost intervention and is mainly used in post-MDA scenarios, where the low prevalences mean sample sizes need to be both large and spatially-distributed to effectively estimate presence or absence of transmission \cite{WHO2011}. The development of rapid point-of-care tests such as the filarial test strip (FTS) has alleviated some of these challenges, but many programs find there is a lack of willingness in the population to participate in surveillance for an infection is no longer considered a major problem \cite{Pilotte2016}.
 
-It is important to note that our assumption of zero covariance between trap type samples only holds if traps are not set at the same time in the same place, as we might expect the presence of multiple trap types in one location to bias the samples. We have also assumed that the same number of vectors are included in each pool, which is not always the case in vector studies, often the average pool size is quoted instead. Further investigation would need to be done as to how feasible it is to fix pool size in the field and how variation in pool size might impact our calculations.
+Pooling vectors is common practice in the field, particularly if resources are limited, and can save substantially on PCR costs \cite{Okorie2016}. Our first investigations suggest that the difference in confidence between individually testing and pooling vectors is relatively small, potentially due to the low prevalence settings considered. We would expect this difference to be increased for higher prevalences, but as the main interest in xenomonitoring comes from elimination settings, pool sizes of up to 20 vectors in these places should only lead to a small loss of accuracy. More work needs to be done to directly link required sample size, pool size and error width. 
+
+It is important to note that our assumption of zero co-variance between trap type samples only holds if traps are not set at the same time in the same place, as we might expect the presence of multiple trap types in one location to bias the samples. We have also assumed that the same number of vectors are included in each pool, which is not always the case in vector studies, often the average pool size is quoted instead. Further investigation would need to be done as to how feasible it is to fix pool size in the field and how variation in pool size might impact our calculations.
 
 As more countries achieve EPHP and move into post-MDA surveillance, novel tools for monitoring infection levels become increasingly important. Human-based testing is expensive and invasive, with high associated labour and resource costs, and xenomonitoring has long been discussed as a potentially financially viable alternative but there is still little understanding of the relationship between vector prevalence and host prevalence and common opinion is that sample sizes may be logistically infeasible. We have attempted to bridge this knowledge gap and our findings suggest that sample sizes may be more feasible than expected, depending on required precision levels. However, we have presented analysis of one potential xenomonitoring surveillance method, further modelling and field work will be needed to investigate and compare a range of methods in developing the best tools for surveillance in the journey towards true elimination of transmission.
 
 \subsection{Chapter Summary}
 
-In this chapter I derived analytical relationships between host prevalence and measurable parasite DNA prevalence in vector blood meals, considering both individually sampled and pooled vector measurements. I also described a method for estimating the proportion of parous mosquitoes. I also derived an explicit formula for sample size calculation, depending on a required precision. My results show that required sample sizes may be more feasible than previously expected, and that pooling vectors may be a viable method for reducing the costs and labor required for use of xenomonitoring as a surveillance tool.
+In this chapter I derived analytical relationships between host prevalence and measurable parasite DNA prevalence in vector blood meals, considering both individually sampled and pooled vector measurements. I also described a method for estimating the proportion of parous mosquitoes. I also derived an explicit formula for sample size calculation, depending on a required precision. My results show that required sample sizes may be more feasible than previously expected, and that pooling vectors may be a viable method for reducing the costs and labour required for use of xenomonitoring as a surveillance tool.
 
 \FloatBarrier

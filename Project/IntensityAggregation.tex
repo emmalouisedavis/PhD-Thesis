@@ -60,7 +60,7 @@ For a given efficacy of treatment, $\alpha$, MDA is then applied to the individu
     \item Random sampling, treatment efficacy per worm: an $\alpha$ probability of clearing each individual worm, independent of the number of worms present in a host.
 \end{enumerate}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}$
 \begin{array}{cc}
 \includegraphics[width=7.45cm]{Figures/Aggregation/prevVmwb.png}
@@ -68,7 +68,7 @@ For a given efficacy of treatment, $\alpha$, MDA is then applied to the individu
 \includegraphics[width=7.45cm]{Figures/Aggregation/aggVmwb.png}
 \includegraphics[width=7.1cm]{Figures/Aggregation/aggVmda.png}
 \end{array}$
-\caption{Relationships between mean worm burden, prevalence, parasite aggregation and MDA coverage for three cases: assuming MDA leads to proportional reduction of the mean with a constant aggregation parameter $k=1$ (black) and two cases of modelling one round of MDA coverage, with $k$ varied according to best fit negative binomial distribution. Case 1 (blue): MDA efficacy acts per person (either 0\% or 100\% of worms are cleared in each individual treated, with probability 0.88). Case 2 (red): MDA efficacy acts per worm (each worm in a treated human is cleared with probability 0.88). Host prevalence (top row) and parasite aggregation (bottom row) are given as functions of mean worm burden (left column) and MDA coverage (right column, efficacy $=88$\%).}
+\caption[Aggregation and prevalence for different MDA assumptions.]{Relationships between mean worm burden, prevalence, parasite aggregation and MDA coverage for three cases: assuming MDA leads to proportional reduction of the mean with a constant aggregation parameter $k=1$ (black) and two cases of modelling one round of MDA coverage, with $k$ varied according to best fit negative binomial distribution. Case 1 (blue): MDA efficacy acts per person (either 0\% or 100\% of worms are cleared in each individual treated, with probability 0.88). Case 2 (red): MDA efficacy acts per worm (each worm in a treated human is cleared with probability 0.88). Host prevalence (top row) and parasite aggregation (bottom row) are given as functions of mean worm burden (left column) and MDA coverage (right column, efficacy $=88$\%).}
 \label{fig:k}
 \end{center}
 \end{figure}
@@ -77,7 +77,7 @@ A negative binomial distribution is then fitted to the treated population and th
 
 Our results show that assuming a constant $k$, and not re-fitting the negative binomial after applying an external force to the system, results in systematic over-estimation of prevalence compared to the individual-based model. Case 2 of modelling MDA (treatment efficacy per worm in each person treated) also results in a higher estimate of prevalence than Case 1 (treatment efficacy per person). This follows logically from the methods used, as assuming 100\% clearance in 88\% of cases treated will increase heterogeneity in worm burden and reduce prevalence.
 
-We also see that the fitted aggregation parameter, $k$, varies dramatically with MDA coverage (and associated resulting mean worm burden). For Case 1 $k$ decreases with increasing MDA coverage and decreasing mean worm burden, and is close to zero at maximum coverage. This represents increasing heterogeneity as disease levels decline. Case 2 behaves similarly, albeit with a shallower gradient, until an MDA coverage of around 90\% (or a mean worm burden of around 0.2). At these high levels of coverage $k$ begins to increase again, representing reducing heterogeneity. As a coverage of higher than 90\% is infeasible in most settings, this effect is interesting but has no public health relevance.
+We also see that the fitted aggregation parameter, $k$, varies dramatically with MDA coverage (and associated resulting mean worm burden). For Case 1 $k$ decreases with increasing MDA coverage and decreasing mean worm burden, and is close to zero at maximum coverage. This represents increasing heterogeneity as disease levels decline. Case 2 behaves similarly, albeit with a shallower gradient, until an MDA coverage of around 90\% (or a mean worm burden of around 0.2). At these high levels of coverage $k$ begins to increase again, representing reducing heterogeneity. As an effective coverage of higher than 90\% is infeasible in most settings \cite{Hussain2014,Babu2004}, with WHO recommended coverage of 65-80\% dependent on setting, this effect is interesting but has limited public health relevance.
 
 \FloatBarrier
 
@@ -93,7 +93,7 @@ To consider the impact of extended MDA usage on aggregation we consider a sequen
 \includegraphics[width=7.45cm]{Figures/Aggregation/aggVmwb_Sys.png}
 \includegraphics[width=7.1cm]{Figures/Aggregation/aggVmda_Sys.png}
 \end{array}$
-\caption{Relationships between mean worm burden, prevalence, parasite aggregation and MDA coverage for three cases: constant aggregation parameter $k=1$ (black), case 1 (blue) and case 2 (red) -- as described in Figure \ref{fig:k} --  after 4 rounds of MDA. Cases 1 and 2 are presented with random sampling (solid) and systematic non-compliance (dashed). Systematic non-compliance is taken to be maximal, with the same individuals missing treatment in each round. Host prevalence (top row) and parasite aggregation (bottom row) are given as functions of mean worm burden (left column) and MDA coverage (right column, efficacy $=88$\%).}
+\caption[Aggregation and prevalence for systematic non-compliance.]{Relationships between mean worm burden, prevalence, parasite aggregation and MDA coverage for three cases: constant aggregation parameter $k=1$ (black), case 1 (blue) and case 2 (red) -- as described in Figure \ref{fig:k} --  after 4 rounds of MDA. Cases 1 and 2 are presented with random sampling (solid) and systematic non-compliance (dashed). Systematic non-compliance is taken to be maximal, with the same individuals missing treatment in each round. Host prevalence (top row) and parasite aggregation (bottom row) are given as functions of mean worm burden (left column) and MDA coverage (right column, efficacy $=88$\%).}
 \label{fig:k_sys}
 \end{center}
 \end{figure}
@@ -104,7 +104,7 @@ Figure \ref{fig:k_sys} shows prevalence and $k$ for a range of MDA coverage and 
 \begin{center}
 \includegraphics[width=12.5cm]{Project/Figures/Aggregation/Case1Hist.png}\\
 \includegraphics[width=12.5cm]{Project/Figures/Aggregation/Case2Hist.png}
-\caption{Example worm count frequency plots comparing systematic and random compliance for MDA cases 1 (Top, blue, drug efficacy per host) and 2 (Bottom, red, drug efficacy per worm). Worm counts are taken after 4 rounds of MDA at 65\% coverage in each case. MDA efficacy $=$ 88\%.}
+\caption[Worm count frequency distributions.]{Example worm count frequency plots comparing systematic and random compliance for MDA cases 1 (Top, blue, drug efficacy per host) and 2 (Bottom, red, drug efficacy per worm). Worm counts are taken after 4 rounds of MDA at 65\% coverage in each case. MDA efficacy $=$ 88\%.}
 \label{fig:kHist}
 \end{center}
 \end{figure}
